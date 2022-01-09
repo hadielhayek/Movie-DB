@@ -108,3 +108,26 @@ app.get('/movies/read/by-date', function (req, res) {
     }
   
   })
+
+  app.put('/movies/update/:id', function (req, res) {
+    const id = parseInt(req.params.id);
+    if (id < 1 || id > movies.length) {
+      res.status(404).send('the movie ' + id + ' does not exist');
+    }
+    else {
+      const movie = movies[id - 1]
+      const arrObj = Object.values(movie);
+    }
+    const title = req.query.title;
+    const year = parseInt(req.query.year);
+    const rating = parseInt(req.query.rating);
+    if ((title == "" || title == undefined) && (year == "" || year == undefined) && (rating == "" || rating == undefined)) {
+      res.send('you are not updated anythings')
+    }
+    else {
+      (title == "" || title == undefined) ? movies[id - 1].title = arrObj[0] : movies[id - 1].title = title;
+      (year == "" || year == undefined) ? movies[id - 1].year = arrObj[1] : movies[id - 1].year = year;
+      (rating == "" || rating == undefined) ? movies[id - 1].rating = arrObj[2] : movies[id - 1].rating = rating;
+    }
+    res.send(movies);
+  })
