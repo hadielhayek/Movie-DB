@@ -97,3 +97,14 @@ app.get('/movies/read/by-date', function (req, res) {
   
   })
   
+  app.delete('/movies/delete/:id', function (req, res) {
+    const id = parseInt(req.params.id);
+    if (id < 1 || id > movies.length) {
+      res.status(404).send('the movie ' + id + ' does not exist');
+    }
+    else {
+      movies.splice(id - 1, 1);
+      res.send(movies)
+    }
+  
+  })
