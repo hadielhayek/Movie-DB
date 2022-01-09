@@ -74,4 +74,26 @@ app.get('/movies/read/by-date', function (req, res) {
     }
   
   })
+
+  
+  app.post('/movies/add', function (req, res) {
+    const title = req.query.title;
+    const year = parseInt(req.query.year);
+    const rating = parseInt(req.query.rating);
+    var movie = {};
+    if (title === null || year === null || year.toString().length != 4 || typeof (parseInt(year)) !== 'number') {
+      res.status(404).send('you cannot create a movie without providing a title and a year');
+    } else {
+      if (rating === null) {
+        movie = { title: title, year: year, rating: 4 }
+      }
+      else {
+        movie = { title: title, year: year, rating: rating }
+      }
+  
+    }
+    movies.push(movie);
+    res.status(200).send(movies)
+  
+  })
   
