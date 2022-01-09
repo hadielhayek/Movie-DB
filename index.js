@@ -49,3 +49,18 @@ app.put('/update', function (req, res) {
 app.delete('/delete', function (req, res) {
     res.status(200).send("delete")
 })
+
+app.get('/movies/read/by-date', function (req, res) {
+    movies.sort((a, b) => (a.year > b.year) ? 1 : -1)
+    res.status(200).send(movies)
+  })
+  
+  app.get('/movies/read/by-rating', function (req, res) {
+    movies.sort((a, b) => (a.rating < b.rating) ? 1 : -1)
+    res.status(200).send(movies)
+  })
+  
+  app.get('/movies/read/by-title', function (req, res) {
+    movies.sort((a, b) => (a.title > b.title) ? 1 : -1)
+    res.status(200).send(movies)
+  })
